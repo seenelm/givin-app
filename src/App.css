@@ -1,0 +1,8 @@
+.app {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--surface-color);
+  color: var(--text-primary-color);
+}

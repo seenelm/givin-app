@@ -1,0 +1,265 @@
+/* Fundraising Manager Styles */
+
+.manager-header {
+  margin-bottom: 2rem;
+}
+
+.manager-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary-color);
+}
+
+.manager-description {
+  color: var(--text-secondary-color);
+  font-size: 1rem;
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+.manager-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--text-primary-color);
+}
+
+.filter-button:hover {
+  background-color: #f5f5f5;
+}
+
+.filter-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 180px;
+  overflow: hidden;
+}
+
+.filter-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: var(--text-primary-color);
+  background: none;
+  border: none;
+  background: none;
+  border: none;
+}menu but
+#f5f5f5
+.filter-menu button:hover {
+  background-color: #f5f5f5;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.campaigns-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem;
+  background-color: var(--card-color);
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary-color);
+}
+
+.empty-description {
+  color: var(--text-secondary-color);
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.empty-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.empty-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Campaign Card Styles */
+.campaign-card {
+  background-color: var(--card-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.campaign-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.campaign-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.campaign-content {
+  padding: 1.25rem;
+}
+
+.campaign-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary-color);
+}
+
+.campaign-description {
+  color: var(--text-secondary-color);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.campaign-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.campaign-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary-color);
+}
+
+.campaign-status {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.campaign-progress {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: var(--background-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.campaign-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.campaign-raised {
+  font-weight: 600;
+  color: var(--text-primary-color);
+}
+
+.campaign-goal {
+  color: var(--text-secondary-color);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .manager-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .campaigns-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .empty-state {
+    padding: 2rem 1rem;
+  }
+}
+
+.filter-dropdown {
+  width: 100%;
+}
