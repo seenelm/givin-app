@@ -1,5 +1,377 @@
 /* Dashboard Styles */
 
+/* Section Styles */
+.dashboard-section {
+  background-color: var(--card-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.section-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Financial Health Section */
+.stat-trend {
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.stat-trend.positive {
+  color: #2ecc71;
+}
+
+.stat-trend.negative {
+  color: #e74c3c;
+}
+
+.stat-trend.neutral {
+  color: var(--text-secondary-color);
+}
+
+.financial-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.chart-card {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.chart-card h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-placeholder {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Revenue Breakdown */
+.revenue-breakdown {
+  width: 100%;
+}
+
+.revenue-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.revenue-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+}
+
+.revenue-color.individual {
+  background-color: var(--primary-color);
+}
+
+.revenue-color.corporate {
+  background-color: var(--secondary-color);
+}
+
+.revenue-color.grants {
+  background-color: #f39c12;
+}
+
+.revenue-color.other {
+  background-color: #95a5a6;
+}
+
+.revenue-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary-color);
+}
+
+/* Campaign Progress */
+.campaign-progress {
+  width: 100%;
+}
+
+.campaign {
+  margin-bottom: 1.25rem;
+}
+
+.campaign-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary-color);
+}
+
+.progress-container {
+  height: 8px;
+  background-color: #ecf0f1;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+.progress-bar.accent-color {
+  background-color: var(--secondary-color);
+}
+
+.campaign-stats {
+  font-size: 0.75rem;
+  color: var(--text-secondary-color);
+}
+
+/* Relationship Management Section */
+.relationship-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-card {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.metric-icon {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
+
+.metric-content {
+  flex: 1;
+}
+
+.metric-content h4 {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-secondary-color);
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.metric-detail {
+  font-size: 0.75rem;
+  color: var(--text-secondary-color);
+}
+
+/* Donor Segments */
+.donor-segments h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+.segments-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.segment-card {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.segment-card h5 {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+.segment-count {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.segment-total {
+  font-size: 0.75rem;
+  color: var(--text-secondary-color);
+}
+
+/* Tasks Section */
+.tasks-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.tasks-column h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+.task-list, .activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.task-item {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid transparent;
+}
+
+.task-item.priority-high {
+  border-left-color: #e74c3c;
+}
+
+.task-item.priority-medium {
+  border-left-color: #f39c12;
+}
+
+.task-item.priority-low {
+  border-left-color: #3498db;
+}
+
+.task-icon {
+  margin-right: 1rem;
+  font-size: 1rem;
+  color: var(--text-secondary-color);
+  padding-top: 0.25rem;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-content h5 {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+.task-content p {
+  font-size: 0.75rem;
+  color: var(--text-secondary-color);
+}
+
+.task-action {
+  margin-left: 0.5rem;
+}
+
+.task-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.task-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Activity List */
+.activity-item {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.activity-icon {
+  margin-right: 1rem;
+  font-size: 1rem;
+  padding-top: 0.25rem;
+}
+
+.activity-icon.completed {
+  color: #2ecc71;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-content h5 {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+.activity-content p {
+  font-size: 0.75rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 0.25rem;
+}
+
+.activity-time {
+  font-size: 0.7rem !important;
+  color: var(--text-tertiary-color, #95a5a6) !important;
+  margin-top: 0.25rem;
+}
+
 .manager-header {
   margin-bottom: 2rem;
 }
@@ -46,7 +418,7 @@
 }
 
 .stat-card {
-  background-color: var(--card-color);
+  background-color: var(--surface-color);
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -133,12 +505,128 @@
   
   .welcome-card,
   .stat-card,
-  .quick-actions {
+  .quick-actions,
+  .dashboard-section {
     padding: 1rem;
   }
   
   .action-buttons {
     flex-direction: column;
+  }
+  
+  /* Financial charts responsive */
+  .financial-charts {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Relationship metrics responsive */
+  .relationship-metrics {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Donor segments responsive */
+  .segments-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  
+  /* Tasks container responsive */
+  .tasks-container {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  /* Metric card responsive */
+  .metric-card {
+    padding: 1rem;
+  }
+  
+  .metric-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .metric-value {
+    font-size: 1.25rem;
+  }
+  
+  /* Task items responsive */
+  .task-item, .activity-item {
+    padding: 0.875rem;
+  }
+  
+  .task-content h5, .activity-content h5 {
+    font-size: 0.8125rem;
+  }
+  
+  .task-content p, .activity-content p {
+    font-size: 0.75rem;
+  }
+  
+  .task-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .manager-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .manager-description {
+    font-size: 0.875rem;
+  }
+  
+  .section-header h3 {
+    font-size: 1.125rem;
+  }
+  
+  /* Stat cards for very small screens */
+  .stat-card {
+    padding: 0.875rem;
+  }
+  
+  .stat-card h4 {
+    font-size: 0.875rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .stat-trend {
+    font-size: 0.75rem;
+  }
+  
+  /* Donor segments for very small screens */
+  .segments-container {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Chart cards for very small screens */
+  .chart-card {
+    padding: 1rem;
+  }
+  
+  .chart-placeholder {
+    min-height: 180px;
+  }
+  
+  /* Task and activity items for very small screens */
+  .task-icon, .activity-icon {
+    font-size: 0.875rem;
+    margin-right: 0.75rem;
+  }
+  
+  /* Quick actions for very small screens */
+  .action-button {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
   }
 }
 

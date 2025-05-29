@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import '../assets/styles/sidebar.css';
-import givinLogo from '../assets/images/givin-logo.png';
+import givinLogo from '../assets/images/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faChartLine, 

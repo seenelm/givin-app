@@ -3,9 +3,12 @@
   --background-color: #F7F6F7;
   --surface-color: #FAFAFA;
   --primary-color: #31DFA2;
+  --primary-color-rgb: 49, 223, 162; /* RGB values for primary color */
   --secondary-color: #28B382;
+  --secondary-color-rgb: 40, 179, 130; /* RGB values for secondary color */
   --text-primary-color: #333333;
   --text-secondary-color: #666666;
+  --text-tertiary-color: #95a5a6;
   --border-color: #e0e0e0;
   --card-color: #ffffff;
   --skeleton-color: #e0e0e0;
@@ -21,9 +24,12 @@
     --background-color: #121212;
     --surface-color: #1e1e1e;
     --primary-color: #31DFA2;
+    --primary-color-rgb: 49, 223, 162; /* RGB values for primary color */
     --secondary-color: #28B382;
+    --secondary-color-rgb: 40, 179, 130; /* RGB values for secondary color */
     --text-primary-color: #f5f5f5;
     --text-secondary-color: #b3b3b3;
+    --text-tertiary-color: #95a5a6;
     --border-color: #2c2c2c;
     --card-color: #2c2c2c;
     --skeleton-color: #2c2c2c;
