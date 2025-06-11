@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import Chat from './Chat';
-import { useChatSidebar } from '../context/ChatSidebarContext';
-import '../assets/styles/resizable-chat-sidebar.css';
+import Chat from '../chat/Chat';
+import { useChatSidebar } from '../../context/ChatSidebarContext';
+import '../../assets/styles/resizable-chat-sidebar.css';
 
 const ResizableChatSidebar: React.FC = () => {
   const { isCollapsed, toggleCollapse, width, setWidth } = useChatSidebar();

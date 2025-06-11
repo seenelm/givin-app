@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faUser, faRobot } from '@fortawesome/free-solid-svg-icons';
-import '../assets/styles/chat.css';
+import '../../assets/styles/chat.css';
 
 interface Message {
   id: string;
@@ -70,7 +70,7 @@ const Chat: React.FC = () => {
   return (
     <div className="chat-container">
       <div className="chat-header">
-        <h3>Chat Assistant</h3>
+        <h3>Givin Assistant</h3>
       </div>
       
       <div className="messages-container">
