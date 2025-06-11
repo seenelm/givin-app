@@ -1,39 +1,55 @@
 /* Fundraising Manager Styles */
 
-.manager-header {
+.fundraising-manager-container .manager-header {
   margin-bottom: 2rem;
 }
 
-.manager-header h2 {
+.fundraising-manager-container .manager-header h2 {
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: var(--text-primary-color);
 }
 
-.manager-description {
+.fundraising-manager-container .manager-description {
   color: var(--text-secondary-color);
   font-size: 1rem;
   max-width: 700px;
   line-height: 1.5;
 }
 
-.manager-controls {
+.fundraising-manager-container .manager-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.filter-dropdown {
+.fundraising-manager-container .filter-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fundraising-manager-container .action-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.fundraising-manager-container .filter-dropdown {
   position: relative;
+  min-width: 200px;
 }
 
-.filter-button {
+.fundraising-manager-container .filter-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   background-color: var(--card-color);
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -42,16 +58,16 @@
   color: var(--text-primary-color);
 }
 
-.filter-button:hover {
-  background-color: #f5f5f5;
+.fundraising-manager-container .filter-button:hover {
+  background-color: var(--card-color-hover);
 }
 
-.filter-menu {
+.fundraising-manager-container .filter-menu {
   position: absolute;
   top: 100%;
   left: 0;
   margin-top: 0.25rem;
-  background-color: white;
+  background-color: var(--card-color);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -60,85 +76,120 @@
   overflow: hidden;
 }
 
-.filter-menu button {
+.fundraising-manager-container .filter-menu button {
   display: block;
   width: 100%;
   text-align: left;
   padding: 0.75rem 1rem;
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.2s;
   color: var(--text-primary-color);
-  background: none;
-  border: none;
-  background: none;
-  border: none;
-}menu but
-#f5f5f5
-.filter-menu button:hover {
-  background-color: #f5f5f5;
+  transition: background-color 0.2s;
 }
 
-.add-button {
+.fundraising-manager-container .filter-menu button:hover {
+  background-color: var(--card-color-hover);
+}
+
+.fundraising-manager-container .add-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--text-primary-color);
   border: none;
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  white-space: nowrap;
+  min-width: 140px;
+  justify-content: center;
 }
 
-.add-button:hover {
-  background-color: var(--secondary-color);
+.fundraising-manager-container .import-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--card-color);
+  color: var(--text-primary-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  justify-content: center;
 }
 
-.campaigns-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+.fundraising-manager-container .import-button:hover {
+  background-color: var(--card-color-hover);
+  border-color: var(--border-color);
 }
 
-.empty-state {
+.fundraising-manager-container .add-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.fundraising-manager-container .campaigns-container {
+  min-height: 400px;
+}
+
+.fundraising-manager-container .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 3rem;
+  padding: 4rem 2rem;
   background-color: var(--card-color);
   border-radius: 8px;
-  margin-top: 2rem;
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+  min-height: 350px;
 }
 
-.empty-icon {
-  font-size: 3rem;
+.fundraising-manager-container .empty-state-icon {
+  font-size: 2.5rem;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
+  background-color: rgba(49, 223, 162, 0.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.empty-title {
+.fundraising-manager-container .empty-state h3 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
   color: var(--text-primary-color);
 }
 
-.empty-description {
+.fundraising-manager-container .empty-state p {
   color: var(--text-secondary-color);
   max-width: 400px;
   margin-bottom: 1.5rem;
   line-height: 1.5;
 }
 
-.empty-button {
+.fundraising-manager-container .empty-state-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.fundraising-manager-container .primary-button {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   background-color: var(--primary-color);
   color: white;
   border: none;
@@ -148,118 +199,175 @@
   transition: background-color 0.2s;
 }
 
-.empty-button:hover {
-  background-color: var(--secondary-color);
+.fundraising-manager-container .primary-button:hover {
+  background-color: var(--primary-color-hover);
 }
 
 /* Campaign Card Styles */
-.campaign-card {
+.fundraising-manager-container .campaign-card {
   background-color: var(--card-color);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-color);
 }
 
-.campaign-card:hover {
+.fundraising-manager-container .campaign-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.campaign-image {
+.fundraising-manager-container .campaign-image {
   width: 100%;
   height: 160px;
   object-fit: cover;
 }
 
-.campaign-content {
+.fundraising-manager-container .campaign-content {
   padding: 1.25rem;
 }
 
-.campaign-title {
+.fundraising-manager-container .campaign-title {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--text-primary-color);
 }
 
-.campaign-description {
+.fundraising-manager-container .campaign-description {
   color: var(--text-secondary-color);
   font-size: 0.9rem;
   margin-bottom: 1rem;
   line-height: 1.5;
 }
 
-.campaign-meta {
+.fundraising-manager-container .campaign-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-.campaign-date {
+.fundraising-manager-container .campaign-date {
   font-size: 0.85rem;
   color: var(--text-secondary-color);
 }
 
-.campaign-status {
+.fundraising-manager-container .campaign-status {
   font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
   font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  background-color: var(--primary-color);
-  color: white;
 }
 
-.campaign-progress {
+.fundraising-manager-container .status-active {
+  background-color: rgba(49, 223, 162, 0.1);
+  color: var(--primary-color);
+}
+
+.fundraising-manager-container .status-completed {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+.fundraising-manager-container .status-draft {
+  background-color: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+}
+
+.fundraising-manager-container .campaign-progress {
   margin-bottom: 1rem;
 }
 
-.progress-bar {
-  height: 6px;
-  background-color: var(--background-color);
-  border-radius: 3px;
+.fundraising-manager-container .progress-bar {
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
   overflow: hidden;
+  margin-bottom: 0.5rem;
 }
 
-.progress-fill {
+.fundraising-manager-container .progress-fill {
   height: 100%;
   background-color: var(--primary-color);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
-.campaign-stats {
+.fundraising-manager-container .progress-stats {
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
-.campaign-raised {
+.fundraising-manager-container .amount-raised {
   font-weight: 600;
   color: var(--text-primary-color);
 }
 
-.campaign-goal {
+.fundraising-manager-container .goal-amount {
   color: var(--text-secondary-color);
+}
+
+.fundraising-manager-container .campaign-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.fundraising-manager-container .campaign-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fundraising-manager-container .view-button {
+  background-color: var(--card-color);
+  color: var(--text-primary-color);
+  border: 1px solid var(--border-color);
+}
+
+.fundraising-manager-container .view-button:hover {
+  background-color: var(--card-color-hover);
+}
+
+.fundraising-manager-container .edit-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.fundraising-manager-container .edit-button:hover {
+  background-color: var(--primary-color-hover);
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  .manager-controls {
+  .fundraising-manager-container .manager-controls {
     flex-direction: column;
     align-items: stretch;
-    gap: 1rem;
   }
   
-  .campaigns-container {
+  .fundraising-manager-container .filter-dropdown {
+    margin-bottom: 1rem;
+  }
+  
+  .fundraising-manager-container .action-buttons {
+    justify-content: space-between;
+  }
+  
+  .fundraising-manager-container .campaigns-container {
     grid-template-columns: 1fr;
   }
   
-  .empty-state {
-    padding: 2rem 1rem;
+  .fundraising-manager-container .empty-state-actions {
+    flex-direction: column;
+    width: 100%;
   }
-}
-
-.filter-dropdown {
-  width: 100%;
+  
+  .fundraising-manager-container .empty-state-actions button {
+    width: 100%;
+  }
 }
