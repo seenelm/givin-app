@@ -1,310 +1,314 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/Dashboard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faChartLine, 
-  faUsers, 
-  faRobot,
-  faMoneyBillWave,
-  faHandshake,
-  faCheckCircle,
-  faExclamationTriangle,
-  faCalendarCheck,
-  faPiggyBank,
-  faChartPie,
-  faUserPlus,
-  faEnvelope,
-  faListCheck
+  faRocket,
+  faBuilding
 } from '@fortawesome/free-solid-svg-icons';
 
+// TypeScript interfaces for neural network animation
+interface NetworkNode {
+  x: number;
+  y: number;
+  radius: number;
+  vx: number;
+  vy: number;
+  pulsePhase: number;
+}
+
+interface NetworkConnection {
+  from: number;
+  to: number;
+  active: boolean;
+  progress: number;
+  pulseSpeed: number;
+}
+
 const Dashboard: React.FC = () => {
-  return (
-    <div className="content-body">
-      <div className="manager-header">
-        <h2>Organization Overview</h2>
-        <p className="manager-description">
-          Your organization at a glance - monitor key metrics, manage relationships, and stay on top of important tasks.
-        </p>
-      </div>
+  const [animationComplete, setAnimationComplete] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [ein, setEin] = useState<string>('');
+  const [einError, setEinError] = useState<string>('');
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const totalSteps = 5; // Total number of steps in the onboarding process
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const animationRef = useRef<number | null>(null);
+  
+  const handleOpenModal = () => {
+    setShowModal(true);
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+  };
+  
+  const handleCloseModal = () => {
+    setShowModal(false);
+    // Re-enable body scrolling when modal is closed
+    document.body.style.overflow = 'auto';
+    // Reset state when modal is closed
+    setEin('');
+    setEinError('');
+    setCurrentStep(1);
+  };
+  
+  const handleEinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEin(value);
+    
+    // Clear error when user starts typing
+    if (einError) setEinError('');
+  };
+  
+  const handleContinue = () => {
+    // Validate EIN
+    if (!ein.trim()) {
+      setEinError('Please enter your organization\'s EIN');
+      return;
+    }
+    
+    // Basic EIN format validation (9 digits, can be formatted as XX-XXXXXXX)
+    const einRegex = /^\d{2}-?\d{7}$/;
+    if (!einRegex.test(ein)) {
+      setEinError('Please enter a valid 9-digit EIN (format: XX-XXXXXXX)');
+      return;
+    }
+    
+    // If valid, proceed to next step
+    setCurrentStep(prev => prev + 1);
+    // Here you would handle the next step or submit the form
+    // For now, we'll just close the modal after a successful submission
+    if (currentStep >= totalSteps) {
+      handleCloseModal();
+    }
+  };
+  
+  // Neural network animation
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      const container = canvas.parentElement;
+      if (container) {
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight;
+      }
+    };
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Neural network nodes
+    const nodes: NetworkNode[] = [];
+    const connections: NetworkConnection[] = [];
+    const nodeCount = 15;
+    
+    // Create nodes
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 2,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        pulsePhase: Math.random() * Math.PI * 2
+      });
+    }
+    
+    // Create connections between nodes
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        if (Math.random() > 0.85) { // 15% chance to create a connection
+          connections.push({
+            from: i,
+            to: j,
+            active: false,
+            progress: 0,
+            pulseSpeed: Math.random() * 0.02 + 0.01
+          });
+        }
+      }
+    }
+    
+    // Animation
+    let startTime = Date.now();
+    
+    const animate = () => {
+      if (!ctx || !canvas) return;
       
-      {/* Financial Health Section */}
-      <div className="dashboard-section">
-        <div className="section-header">
-          <h3><FontAwesomeIcon icon={faMoneyBillWave} /> Financial Health</h3>
-        </div>
-        <div className="dashboard-stats">
-          <div className="stat-card">
-            <h4>Total Raised</h4>
-            <p className="stat-value">$24,500</p>
-            <p className="stat-trend positive">+12% from last month</p>
-          </div>
-          <div className="stat-card">
-            <h4>Monthly Recurring</h4>
-            <p className="stat-value">$1,850</p>
-            <p className="stat-trend positive">+5% from last month</p>
-          </div>
-          <div className="stat-card">
-            <h4>Avg. Donation</h4>
-            <p className="stat-value">$75</p>
-            <p className="stat-trend neutral">Same as last month</p>
-          </div>
-          <div className="stat-card">
-            <h4>Donor Retention</h4>
-            <p className="stat-value">78%</p>
-            <p className="stat-trend positive">+3% from last month</p>
-          </div>
-        </div>
-        
-        <div className="financial-charts">
-          <div className="chart-card">
-            <h4><FontAwesomeIcon icon={faChartPie} /> Revenue Breakdown</h4>
-            <div className="chart-placeholder">
-              <div className="revenue-breakdown">
-                <div className="revenue-item">
-                  <div className="revenue-color individual"></div>
-                  <div className="revenue-label">Individual Donations (65%)</div>
-                </div>
-                <div className="revenue-item">
-                  <div className="revenue-color corporate"></div>
-                  <div className="revenue-label">Corporate Giving (20%)</div>
-                </div>
-                <div className="revenue-item">
-                  <div className="revenue-color grants"></div>
-                  <div className="revenue-label">Grants (10%)</div>
-                </div>
-                <div className="revenue-item">
-                  <div className="revenue-color other"></div>
-                  <div className="revenue-label">Other (5%)</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="chart-card">
-            <h4><FontAwesomeIcon icon={faPiggyBank} /> Fundraising Progress</h4>
-            <div className="chart-placeholder">
-              <div className="campaign-progress">
-                <div className="campaign">
-                  <div className="campaign-name">Annual Gala</div>
-                  <div className="progress-container">
-                    <div className="progress-bar accent-color" style={{width: '75%'}}></div>
-                  </div>
-                  <div className="campaign-stats">$15,000 of $20,000 (75%)</div>
-                </div>
-                <div className="campaign">
-                  <div className="campaign-name">Summer Program</div>
-                  <div className="progress-container">
-                    <div className="progress-bar accent-color" style={{width: '40%'}}></div>
-                  </div>
-                  <div className="campaign-stats">$6,000 of $15,000 (40%)</div>
-                </div>
-                <div className="campaign">
-                  <div className="campaign-name">Building Fund</div>
-                  <div className="progress-container">
-                    <div className="progress-bar accent-color" style={{width: '25%'}}></div>
-                  </div>
-                  <div className="campaign-stats">$12,500 of $50,000 (25%)</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      {/* Relationship Management Section */}
-      <div className="dashboard-section">
-        <div className="section-header">
-          <h3><FontAwesomeIcon icon={faHandshake} /> Relationship Management</h3>
-        </div>
-        <div className="relationship-metrics">
-          <div className="metric-card">
-            <div className="metric-icon">
-              <FontAwesomeIcon icon={faUsers} />
-            </div>
-            <div className="metric-content">
-              <h4>Total Donors</h4>
-              <p className="metric-value">327</p>
-              <p className="metric-detail">42 new this month</p>
-            </div>
-          </div>
-          <div className="metric-card">
-            <div className="metric-icon">
-              <FontAwesomeIcon icon={faUserPlus} />
-            </div>
-            <div className="metric-content">
-              <h4>Acquisition Rate</h4>
-              <p className="metric-value">14.8%</p>
-              <p className="metric-detail">+2.3% from last month</p>
-            </div>
-          </div>
-          <div className="metric-card">
-            <div className="metric-icon">
-              <FontAwesomeIcon icon={faEnvelope} />
-            </div>
-            <div className="metric-content">
-              <h4>Email Engagement</h4>
-              <p className="metric-value">32%</p>
-              <p className="metric-detail">Open rate for last campaign</p>
-            </div>
-          </div>
-        </div>
+      // Update nodes
+      nodes.forEach(node => {
+        // Move nodes
+        node.x += node.vx;
+        node.y += node.vy;
         
-        <div className="donor-segments">
-          <h4>Donor Segments</h4>
-          <div className="segments-container">
-            <div className="segment-card">
-              <h5>Major Donors</h5>
-              <p className="segment-count">18 donors</p>
-              <p className="segment-total">$15,200 this year</p>
-            </div>
-            <div className="segment-card">
-              <h5>Monthly Givers</h5>
-              <p className="segment-count">76 donors</p>
-              <p className="segment-total">$1,850 monthly</p>
-            </div>
-            <div className="segment-card">
-              <h5>First-Time Donors</h5>
-              <p className="segment-count">42 donors</p>
-              <p className="segment-total">$2,310 this month</p>
-            </div>
-            <div className="segment-card">
-              <h5>Lapsed Donors</h5>
-              <p className="segment-count">24 donors</p>
-              <p className="segment-total">$4,800 potential</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        // Bounce off edges
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+        
+        // Update pulse phase
+        node.pulsePhase += 0.02;
+        if (node.pulsePhase > Math.PI * 2) node.pulsePhase -= Math.PI * 2;
+        
+        // Draw node
+        const opacity = 0.5 + 0.5 * Math.sin(node.pulsePhase);
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(76, 175, 80, ${opacity})`;
+        ctx.fill();
+      });
       
-      {/* Tasks Section */}
-      <div className="dashboard-section">
-        <div className="section-header">
-          <h3><FontAwesomeIcon icon={faListCheck} /> Tasks</h3>
-        </div>
+      // Draw connections
+      connections.forEach(conn => {
+        const fromNode = nodes[conn.from];
+        const toNode = nodes[conn.to];
         
-        <div className="tasks-container">
-          <div className="tasks-column">
-            <h4>Recommended Tasks</h4>
-            <div className="task-list">
-              <div className="task-item priority-high">
-                <div className="task-icon">
-                  <FontAwesomeIcon icon={faExclamationTriangle} />
-                </div>
-                <div className="task-content">
-                  <h5>Follow up with major donors</h5>
-                  <p>5 donors haven't received a thank you call</p>
-                </div>
-                <div className="task-action">
-                  <button className="task-button">Start</button>
-                </div>
-              </div>
-              
-              <div className="task-item priority-medium">
-                <div className="task-icon">
-                  <FontAwesomeIcon icon={faCalendarCheck} />
-                </div>
-                <div className="task-content">
-                  <h5>Plan donor appreciation event</h5>
-                  <p>Annual event needs planning within 2 weeks</p>
-                </div>
-                <div className="task-action">
-                  <button className="task-button">Start</button>
-                </div>
-              </div>
-              
-              <div className="task-item priority-medium">
-                <div className="task-icon">
-                  <FontAwesomeIcon icon={faEnvelope} />
-                </div>
-                <div className="task-content">
-                  <h5>Send monthly newsletter</h5>
-                  <p>Due in 3 days</p>
-                </div>
-                <div className="task-action">
-                  <button className="task-button">Start</button>
-                </div>
-              </div>
-              
-              <div className="task-item priority-low">
-                <div className="task-icon">
-                  <FontAwesomeIcon icon={faChartLine} />
-                </div>
-                <div className="task-content">
-                  <h5>Review campaign performance</h5>
-                  <p>Summer campaign ended last week</p>
-                </div>
-                <div className="task-action">
-                  <button className="task-button">Start</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        // Calculate distance
+        const dx = toNode.x - fromNode.x;
+        const dy = toNode.y - fromNode.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Only draw connections if nodes are close enough
+        if (distance < canvas.width * 0.3) {
+          // Draw line
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
           
-          <div className="tasks-column">
-            <h4>Recent Activity</h4>
-            <div className="activity-list">
-              <div className="activity-item">
-                <div className="activity-icon completed">
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                </div>
-                <div className="activity-content">
-                  <h5>New donation received</h5>
-                  <p>$500 from Sarah Johnson</p>
-                  <p className="activity-time">Today, 10:23 AM</p>
-                </div>
+          // Line opacity based on distance
+          const opacity = 0.1 * (1 - distance / (canvas.width * 0.3));
+          ctx.strokeStyle = `rgba(76, 175, 80, ${opacity})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+          
+          // Randomly activate connections
+          if (Math.random() < 0.001 && !conn.active) {
+            conn.active = true;
+            conn.progress = 0;
+          }
+          
+          // Draw data pulse animation
+          if (conn.active) {
+            // Update progress
+            conn.progress += conn.pulseSpeed;
+            
+            if (conn.progress >= 1) {
+              conn.active = false;
+              conn.progress = 0;
+            } else {
+              // Draw pulse
+              const pulsePos = {
+                x: fromNode.x + dx * conn.progress,
+                y: fromNode.y + dy * conn.progress
+              };
+              
+              const pulseRadius = 2 + Math.sin(conn.progress * Math.PI) * 2;
+              
+              ctx.beginPath();
+              ctx.arc(pulsePos.x, pulsePos.y, pulseRadius, 0, Math.PI * 2);
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+              ctx.fill();
+            }
+          }
+        }
+      });
+      
+      // Check if animation should stop
+      const currentTime = Date.now();
+      if (currentTime - startTime > 8000 && !animationComplete) {
+        setAnimationComplete(true);
+      }
+      
+      // Continue animation if not complete
+      if (!animationComplete) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
+    };
+    
+    // Start animation
+    animationRef.current = requestAnimationFrame(animate);
+    
+    // Cleanup
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, [animationComplete]);
+
+  return (
+    <div className="content-body build-org-container">
+      {/* Neural network animation */}
+      <div className="neural-network-container">
+        <canvas 
+          ref={canvasRef} 
+          className={`neural-network-canvas ${animationComplete ? 'animation-complete' : ''}`}
+        />
+      </div>
+
+      <div className="build-org-content">
+        <div className="build-org-icon">
+          <FontAwesomeIcon icon={faBuilding} size="4x" />
+        </div>
+        <h1>Start Building Your Organization</h1>
+        <p className="build-org-description">
+          Discover the power of givin AI to transform how your nonprofit operates
+        </p>
+        
+        <button className="build-org-button" onClick={handleOpenModal}>
+          <FontAwesomeIcon icon={faRocket} className="button-icon" />
+          Build Your Org
+        </button>
+      </div>
+      
+      {/* Full-page modal */}
+      {showModal && (
+        <div className="full-page-modal">
+          <div className="modal-content">
+            {/* Close button in corner */}
+            <button className="close-modal-button" onClick={handleCloseModal}>
+              &times;
+            </button>
+            
+            {/* Progress bar at top */}
+            <div className="progress-bar-container">
+              <div className="progress-bar" style={{ width: `${(currentStep / totalSteps) * 100}%` }}></div>
+            </div>
+            
+            <div className="question-container">
+              <h2>What is your organization's EIN?</h2>
+              
+              <div className="input-container">
+                <label htmlFor="ein">EIN</label>
+                <input 
+                  type="text" 
+                  id="ein" 
+                  placeholder="XX-XXXXXXX"
+                  value={ein}
+                  onChange={handleEinChange}
+                  className={einError ? 'error' : ''}
+                />
+                {einError ? (
+                  <p className="input-error">{einError}</p>
+                ) : (
+                  <p className="input-help">Please enter your 9-digit Employer Identification Number</p>
+                )}
               </div>
               
-              <div className="activity-item">
-                <div className="activity-icon completed">
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                </div>
-                <div className="activity-content">
-                  <h5>Email campaign sent</h5>
-                  <p>Summer Program Update</p>
-                  <p className="activity-time">Yesterday, 2:15 PM</p>
-                </div>
-              </div>
-              
-              <div className="activity-item">
-                <div className="activity-icon completed">
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                </div>
-                <div className="activity-content">
-                  <h5>New donor added</h5>
-                  <p>Michael Smith joined as monthly donor</p>
-                  <p className="activity-time">Yesterday, 11:05 AM</p>
-                </div>
-              </div>
-              
-              <div className="activity-item">
-                <div className="activity-icon completed">
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                </div>
-                <div className="activity-content">
-                  <h5>Grant application submitted</h5>
-                  <p>Community Foundation - $10,000</p>
-                  <p className="activity-time">May 26, 9:30 AM</p>
-                </div>
-              </div>
+              <button className="continue-button" onClick={handleContinue}>
+                Continue
+              </button>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Quick Actions Section */}
-      <div className="quick-actions">
-        <h3>Quick Actions</h3>
-        <div className="action-buttons">
-          <button className="action-button" onClick={() => window.location.href = '/fundraising-manager'}>
-            <FontAwesomeIcon icon={faChartLine} /> Create Campaign
-          </button>
-          <button className="action-button" onClick={() => window.location.href = '/donor-manager'}>
-            <FontAwesomeIcon icon={faUsers} /> Add Donor
-          </button>
-          <button className="action-button" onClick={() => window.location.href = '/givin-assistant'}>
-            <FontAwesomeIcon icon={faRobot} /> Ask Assistant
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

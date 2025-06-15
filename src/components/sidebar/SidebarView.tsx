@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faChartLine, 
   faUsers, 
-  faHome
+  faHome,
+  faBook
 } from '@fortawesome/free-solid-svg-icons';
 import givinLogo from '../../assets/images/logo.svg';
 import '../../assets/styles/sidebar.css';
@@ -44,6 +45,14 @@ export const SidebarView: React.FC<SidebarProps> = (props) => {
           <FontAwesomeIcon icon={faUsers} />
           <span>Donors</span>
         </button>
+        
+        <button 
+          className={`tab-button ${currentPath === '/data-library' ? 'active' : ''}`}
+          onClick={() => navigate('/data-library')}
+        >
+          <FontAwesomeIcon icon={faBook} />
+          <span>Data</span>
+        </button>
       </div>
     );
   }
@@ -79,6 +88,17 @@ export const SidebarView: React.FC<SidebarProps> = (props) => {
                 <FontAwesomeIcon icon={faUsers} />
               </span>
               <span className="button-text">Donor Manager</span>
+            </button>
+          </li>
+          <li className="sidebar-menu-item">
+            <button 
+              className={`sidebar-button ${currentPath === '/data-library' ? 'active' : ''}`}
+              onClick={() => navigate('/data-library')}
+            >
+              <span className="icon">
+                <FontAwesomeIcon icon={faBook} />
+              </span>
+              <span className="button-text">Data Library</span>
             </button>
           </li>
         </ul>
