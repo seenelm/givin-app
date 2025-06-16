@@ -1,0 +1,351 @@
+.metrics-panel {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.metrics-panel.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.metrics-panel.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.metrics-panel.empty h3 {
+  margin: 16px 0 8px;
+  font-size: 1.5rem;
+}
+
+.metrics-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(49, 223, 162, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--primary-color, #31DFA2);
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.metrics-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+}
+
+.metrics-header h2 {
+  font-size: 1.75rem;
+  margin: 0 0 8px;
+  color: #343a40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metrics-subtitle {
+  color: #6c757d;
+  margin: 0;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.metric-card {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metric-icon {
+  background-color: rgba(49, 223, 162, 0.15);
+  color: var(--secondary-color, #28B382);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-right: 16px;
+}
+
+.metric-content h3 {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin: 0 0 4px;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 4px;
+}
+
+.metric-detail {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.metrics-section {
+  margin: 32px;
+}
+
+.metrics-section h3 {
+  font-size: 1.25rem;
+  margin: 0 0 16px;
+  color: #343a40;
+}
+
+.campaigns-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.campaign-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.campaign-name {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.campaign-amount {
+  font-size: 0.875rem;
+  color: #495057;
+}
+
+.campaign-bar {
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.campaign-bar-fill {
+  height: 100%;
+  background-color: var(--primary-color, #31DFA2);
+  border-radius: 4px;
+}
+
+.trends-chart-container {
+  position: relative;
+  min-height: 300px;
+  height: auto;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  padding: 20px 10px 60px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+.trends-chart-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(200, 200, 200, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 200, 200, 0.1) 1px, transparent 1px);
+  background-position: 0 0;
+  z-index: 1;
+}
+
+.trends-chart-dots {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 40px;
+  z-index: 2;
+}
+
+.trend-dot-container {
+  position: absolute;
+  transform: translate(-50%, 50%);
+  z-index: 3;
+}
+
+.trend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--primary-color, #31DFA2);
+  box-shadow: 0 0 0 4px rgba(49, 223, 162, 0.2);
+  transition: all 0.3s ease;
+}
+
+.trend-dot:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(49, 223, 162, 0.3);
+}
+
+.trend-dot-label {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--secondary-color, #28B382);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.trend-dot-container:hover .trend-dot-label {
+  opacity: 1;
+}
+
+.trend-dot-connector {
+  position: absolute;
+  height: 2px;
+  background-color: var(--primary-color, #31DFA2);
+  opacity: 0.5;
+  transform-origin: left center;
+  left: 0;
+  top: 50%;
+  z-index: 1;
+}
+
+.trends-chart-labels {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.trend-period-label {
+  position: absolute;
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-align: center;
+  transform: translateX(-50%) rotate(-45deg);
+  transform-origin: top center;
+  white-space: nowrap;
+  bottom: -20px;
+}
+
+.insights-section {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.insights-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.insight-item {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  color: #495057;
+}
+
+.insight-item:before {
+  content: "•";
+  position: absolute;
+  left: 8px;
+  color: #007bff;
+  font-size: 1.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .trends-chart {
+    height: 150px;
+  }
+}
+
+/* Donation import modal styles */
+.donation-import-modal {
+  max-width: 800px;
+}
+
+.metrics-preview {
+  background-color: #f0f7ff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.metrics-preview h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0;
+  color: #0056b3;
+}
+
+.metrics-list {
+  padding-left: 24px;
+  margin: 12px 0;
+}
+
+.metrics-list li {
+  margin-bottom: 8px;
+}
+
+.view-dashboard-prompt {
+  font-style: italic;
+  margin-top: 12px;
+  color: #495057;
+}
+
+.metadata-tag {
+  background-color: #e9ecef;
+  color: #6c757d;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-weight: normal;
+}

@@ -15,18 +15,21 @@ export interface ImportResult {
     row: number;
     message: string;
   }>;
+  additionalInfo?: string;
 }
 
 interface ImportSummaryProps {
   result: ImportResult;
   onClose: () => void;
   onRetry?: () => void;
+  additionalInfo?: React.ReactNode;
 }
 
 const ImportSummary: React.FC<ImportSummaryProps> = ({ 
   result, 
   onClose, 
-  onRetry 
+  onRetry,
+  additionalInfo
 }) => {
   const isSuccess = result.errorCount === 0;
   const hasWarnings = result.warningCount > 0;
@@ -100,6 +103,13 @@ const ImportSummary: React.FC<ImportSummaryProps> = ({
               </li>
             ))}
           </ul>
+        </div>
+      )}
+      
+      {/* Render additional info if provided */}
+      {additionalInfo && (
+        <div className="additional-info">
+          {additionalInfo}
         </div>
       )}
       
