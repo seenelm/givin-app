@@ -4,6 +4,7 @@ import FundraisingManager from './pages/FundraisingManager';
 import DonorManager from './pages/DonorManager';
 import SidebarView from './components/sidebar';
 import ResizableChatSidebar from './components/chat/ResizableChatSidebar';
+import FloatingChatButton from './components/chat/FloatingChatButton';
 import { ChatSidebarProvider } from './context/ChatSidebarContext';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
 import DataLibrary from './pages/DataLibrary';
@@ -28,6 +29,7 @@ const AppContent = () => {
           </Routes>
         </div>
         <ResizableChatSidebar />
+        <FloatingChatButton />
       </div>
     </div>
   );

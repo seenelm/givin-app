@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload, faTrash, faDownload, faEye, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import './styles/DataLibrary.css'
 import Controls from '../components/controls/Controls';
+import Stub from '../components/stub/Stub';
+import dataLibraryStubProps from '../models/DataLibraryStub';
 
 interface DataFile {
   id: string;
@@ -93,22 +95,14 @@ const DataLibrary = () => {
 
       <div className="donors-container">
         {files.length === 0 ? (
-          <div className="empty-state">
-            <div className="empty-state-icon">
-              <FontAwesomeIcon icon={faFileAlt} />
-            </div>
-            <h3>No data files yet</h3>
-            <p>Upload data files to organize and analyze your organization's information.</p>
-            <div className="empty-state-actions">
-              <button 
-                className="primary-button"
-                onClick={() => setShowUploadModal(true)}
-              >
-                <FontAwesomeIcon icon={faUpload} />
-                Upload Files
-              </button>
-            </div>
-          </div>
+          <Stub 
+            {...dataLibraryStubProps}
+            onPrimaryAction={() => setShowUploadModal(true)}
+            onSecondaryAction={() => {}}
+            showSecondaryButton={false}
+            secondaryButtonText=""
+            secondaryButtonIcon={faFileAlt}
+          />
         ) : (
           <div className="donor-list">
             <table className="donor-table">

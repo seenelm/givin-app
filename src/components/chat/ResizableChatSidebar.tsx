@@ -6,7 +6,7 @@ import { useChatSidebar } from '../../context/ChatSidebarContext';
 import '../../assets/styles/resizable-chat-sidebar.css';
 
 const ResizableChatSidebar: React.FC = () => {
-  const { isCollapsed, toggleCollapse, width, setWidth } = useChatSidebar();
+  const { isCollapsed, toggleCollapse, width, setWidth, isMobile } = useChatSidebar();
   const sidebarRef = useRef<HTMLDivElement>(null);
   const resizeHandleRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);
@@ -56,6 +56,9 @@ const ResizableChatSidebar: React.FC = () => {
       document.removeEventListener('mouseup', handleMouseUp);
     };
   }, [isResizing, setWidth]);
+
+  // Don't render on mobile devices
+  if (isMobile) return null;
 
   return (
     <div 

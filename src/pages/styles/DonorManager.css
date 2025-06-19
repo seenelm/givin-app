@@ -21,7 +21,7 @@
 /* Donor List Styles */
 .donor-manager-container .donor-list {
   width: 100%;
-  overflow: auto;
+  overflow-x: auto;
   background-color: var(--card-color);
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -174,3 +174,37 @@
   background-color: var(--card-color-hover);
 }
 
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .donor-manager-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .donor-manager-container .donor-list {
+    width: 88.9vw;
+    overflow-x: hidden;
+    margin-bottom: 4rem;
+  }
+  
+  .donors-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .donor-manager-container .donor-list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+  
+  .donor-manager-container .donor-table th,
+  .donor-manager-container .donor-table td {
+    padding: 0.75rem;
+    white-space: nowrap;
+  }
+  
+  .donor-manager-container .donor-actions {
+    min-width: 110px; /* Ensure action buttons don't wrap */
+  }
+}
