@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload, faTrash, faDownload, faEye, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faDownload, faEye, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import './styles/DataLibrary.css'
 import Controls from '../components/controls/Controls';
 import Stub from '../components/stub/Stub';
