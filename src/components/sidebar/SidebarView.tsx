@@ -4,19 +4,25 @@ import {
   faChartLine, 
   faUsers, 
   faHome,
-  faBook
+  faBook,
+
+  faChevronLeft,
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import givinLogo from '../../assets/images/logo.svg';
 import '../../assets/styles/sidebar.css';
 import { type SidebarProps, useSidebarLogic } from './SidebarLogic';
+import { useSidebar } from '../../context/SidebarContext';
 
 export const SidebarView: React.FC<SidebarProps> = (props) => {
   const {
     title,
     navigate,
     currentPath,
-    isMobile
+    isMobile,
   } = useSidebarLogic(props);
+  
+  const { isCollapsed, toggleSidebar } = useSidebar();
 
   // Mobile tab bar
   if (isMobile) {
@@ -59,67 +65,80 @@ export const SidebarView: React.FC<SidebarProps> = (props) => {
 
   // Desktop sidebar
   return (
-    <div className="sidebar">
-      <div className="sidebar-header">
-        <img src={givinLogo} alt="Givin Logo" className="sidebar-logo" />
-        <h2>{title}</h2>
+    <>
+      <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+        <div className="sidebar-header">
+          <img src={givinLogo} alt="Givin Logo" className="sidebar-logo" />
+          {!isCollapsed && <h2>{title}</h2>}
+        </div>
+        
+        <div className="sidebar-section">
+          <h3 className={`section-title ${isCollapsed ? 'hidden' : ''}`}>Tools</h3>
+          <ul className="sidebar-menu">
+            <li className="sidebar-menu-item">
+              <button 
+                className={`sidebar-button ${currentPath === '/fundraising-manager' ? 'active' : ''}`}
+                onClick={() => navigate('/fundraising-manager')}
+              >
+                <span className="icon">
+                  <FontAwesomeIcon icon={faChartLine} />
+                </span>
+                {!isCollapsed && <span className="button-text">Fundraising Manager</span>}
+              </button>
+            </li>
+            <li className="sidebar-menu-item">
+              <button 
+                className={`sidebar-button ${currentPath === '/donor-manager' ? 'active' : ''}`}
+                onClick={() => navigate('/donor-manager')}
+              >
+                <span className="icon">
+                  <FontAwesomeIcon icon={faUsers} />
+                </span>
+                {!isCollapsed && <span className="button-text">Donor Manager</span>}
+              </button>
+            </li>
+            <li className="sidebar-menu-item">
+              <button 
+                className={`sidebar-button ${currentPath === '/data-library' ? 'active' : ''}`}
+                onClick={() => navigate('/data-library')}
+              >
+                <span className="icon">
+                  <FontAwesomeIcon icon={faBook} />
+                </span>
+                {!isCollapsed && <span className="button-text">Data Library</span>}
+              </button>
+            </li>
+          </ul>
+        </div>
+        
+        {/* Dashboard link at the bottom */}
+        <div className="sidebar-section">
+          <ul className="sidebar-menu">
+            <li className="sidebar-menu-item">
+              <button 
+                className={`sidebar-button ${currentPath === '/dashboard' ? 'active' : ''}`}
+                onClick={() => navigate('/dashboard')}
+              >
+                <span className="icon">
+                  <FontAwesomeIcon icon={faHome} />
+                </span>
+                {!isCollapsed && <span className="button-text">Dashboard</span>}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* Toggle button at the bottom of sidebar */}
+        <div className="sidebar-toggle-container">
+          <button 
+            className="sidebar-toggle-button"
+            onClick={toggleSidebar}
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            <FontAwesomeIcon icon={isCollapsed ? faChevronRight : faChevronLeft} />
+          </button>
+        </div>
       </div>
-      
-      <div className="sidebar-section">
-        <h3 className="section-title">Tools</h3>
-        <ul className="sidebar-menu">
-          <li className="sidebar-menu-item">
-            <button 
-              className={`sidebar-button ${currentPath === '/fundraising-manager' ? 'active' : ''}`}
-              onClick={() => navigate('/fundraising-manager')}
-            >
-              <span className="icon">
-                <FontAwesomeIcon icon={faChartLine} />
-              </span>
-              <span className="button-text">Fundraising Manager</span>
-            </button>
-          </li>
-          <li className="sidebar-menu-item">
-            <button 
-              className={`sidebar-button ${currentPath === '/donor-manager' ? 'active' : ''}`}
-              onClick={() => navigate('/donor-manager')}
-            >
-              <span className="icon">
-                <FontAwesomeIcon icon={faUsers} />
-              </span>
-              <span className="button-text">Donor Manager</span>
-            </button>
-          </li>
-          <li className="sidebar-menu-item">
-            <button 
-              className={`sidebar-button ${currentPath === '/data-library' ? 'active' : ''}`}
-              onClick={() => navigate('/data-library')}
-            >
-              <span className="icon">
-                <FontAwesomeIcon icon={faBook} />
-              </span>
-              <span className="button-text">Data Library</span>
-            </button>
-          </li>
-        </ul>
-      </div>
-      
-      {/* Dashboard link at the bottom */}
-      <div className="sidebar-section">
-        <ul className="sidebar-menu">
-          <li className="sidebar-menu-item">
-            <button 
-              className={`sidebar-button ${currentPath === '/dashboard' ? 'active' : ''}`}
-              onClick={() => navigate('/dashboard')}
-            >
-              <span className="icon">
-                <FontAwesomeIcon icon={faHome} />
-              </span>
-              <span className="button-text">Dashboard</span>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </>
   );
 };

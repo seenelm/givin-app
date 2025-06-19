@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload, faTrash, faDownload, faEye, faFileAlt, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import './styles/DataLibrary.css';
+import { faUpload, faTrash, faDownload, faEye, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import './styles/DataLibrary.css'
+import Controls from '../components/controls/Controls';
 
 interface DataFile {
   id: string;
@@ -15,8 +16,6 @@ interface DataFile {
 const DataLibrary = () => {
   const [files, setFiles] = useState<DataFile[]>([]);
   const [showUploadModal, setShowUploadModal] = useState(false);
-  const [filterOpen, setFilterOpen] = useState(false);
-  const [currentFilter, setCurrentFilter] = useState('All Files');
 
   // Load files from localStorage on component mount
   useEffect(() => {
@@ -74,11 +73,6 @@ const DataLibrary = () => {
     });
   };
   
-  const handleFilterChange = (filter: string) => {
-    setCurrentFilter(filter);
-    setFilterOpen(false);
-  };
-
   return (
     <div className="content-body data-library-container">
       <div className="manager-header">
@@ -88,33 +82,14 @@ const DataLibrary = () => {
         </p>
       </div>
       
-      <div className="manager-controls">
-        <div className="filter-dropdown">
-          <button 
-            className="filter-button" 
-            onClick={() => setFilterOpen(!filterOpen)}
-          >
-            {currentFilter} <FontAwesomeIcon icon={faChevronDown} />
-          </button>
-          {filterOpen && (
-            <div className="filter-menu">
-              <button onClick={() => handleFilterChange('All Files')}>All Files</button>
-              <button onClick={() => handleFilterChange('Documents')}>Documents</button>
-              <button onClick={() => handleFilterChange('Spreadsheets')}>Spreadsheets</button>
-              <button onClick={() => handleFilterChange('Images')}>Images</button>
-            </div>
-          )}
-        </div>
-        <div className="action-buttons">
-          <button 
-            className="upload-button"
-            onClick={() => setShowUploadModal(true)}
-          >
-            <FontAwesomeIcon icon={faUpload} />
-            Upload Files
-          </button>
-        </div>
-      </div>
+      <Controls 
+        filterOptions={{
+          defaultOption: 'All Files',
+          options: ['All Files', 'CSV Files', 'Excel Files', 'Recently Uploaded']
+        }}
+        onFilterChange={(filter) => console.log(`Filter changed to: ${filter}`)}
+        onPrimaryAction={() => setShowUploadModal(true)}
+      />
 
       <div className="donors-container">
         {files.length === 0 ? (

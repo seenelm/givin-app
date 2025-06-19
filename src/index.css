@@ -9,6 +9,7 @@
   --text-primary-color: #333333;
   --text-secondary-color: #666666;
   --text-tertiary-color: #95a5a6;
+  --text-white-color: #ffffff;
   --border-color: #e0e0e0;
   --card-color: #ffffff;
   --skeleton-color: #e0e0e0;
@@ -73,43 +74,6 @@ a:hover {
   text-decoration: underline;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  background-color: var(--primary-color);
-  color: white;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-button:hover {
-  background-color: var(--secondary-color);
-}
-
-/* Card styling */
-.card {
-  background-color: var(--card-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Skeleton loading animation */
-.skeleton {
-  background-color: var(--skeleton-color);
-  background-image: linear-gradient(
-    90deg,
-    var(--skeleton-color) 0px,
-    rgba(255, 255, 255, 0.1) 40px,
-    var(--skeleton-color) 80px
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
 
 @keyframes shimmer {
   0% {

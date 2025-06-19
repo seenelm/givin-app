@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import './styles/DonorManager.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faChevronDown, 
-  faPlus, 
-  faUsers,
-  faFileImport
-} from '@fortawesome/free-solid-svg-icons';
 import CSVImportModal from '../components/csv/CSVImportModal';
 import '../components/csv/CSVImport.css';
+import Controls from '../components/controls/Controls';
+import Stub from '../components/stub/Stub';
+import donorManagerStubProps from '../models/DonationManagerStub';
 
 interface Donor {
   id?: string;
@@ -27,19 +23,8 @@ interface Donor {
 }
 
 const DonorManager: React.FC = () => {
-  const [filterOpen, setFilterOpen] = useState(false);
-  const [currentFilter, setCurrentFilter] = useState('All Donors');
   const [donors, setDonors] = useState<Donor[]>([]);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-
-  const handleFilterChange = (filter: string) => {
-    setCurrentFilter(filter);
-    setFilterOpen(false);
-  };
-
-  const handleImportClick = () => {
-    setIsImportModalOpen(true);
-  };
 
   const handleImportComplete = (importedDonors: Donor[]) => {
     // Add unique IDs to imported donors
@@ -60,51 +45,22 @@ const DonorManager: React.FC = () => {
         </p>
       </div>
 
-      <div className="manager-controls">
-        <div className="filter-dropdown">
-          <button 
-            className="filter-button" 
-            onClick={() => setFilterOpen(!filterOpen)}
-          >
-            {currentFilter} <FontAwesomeIcon icon={faChevronDown} />
-          </button>
-          {filterOpen && (
-            <div className="filter-menu">
-              <button onClick={() => handleFilterChange('All Donors')}>All Donors</button>
-              <button onClick={() => handleFilterChange('Recent')}>Recent</button>
-              <button onClick={() => handleFilterChange('Top Donors')}>Top Donors</button>
-              <button onClick={() => handleFilterChange('Inactive')}>Inactive</button>
-            </div>
-          )}
-        </div>
-        <div className="action-buttons">
-          <button className="import-button" onClick={handleImportClick}>
-            <FontAwesomeIcon icon={faFileImport} /> Import CSV
-          </button>
-          <button className="add-button">
-            <FontAwesomeIcon icon={faPlus} /> Add Donor
-          </button>
-        </div>
-      </div>
+      <Controls
+        filterOptions={{
+          defaultOption: 'All Donors',
+          options: ['All Donors', 'Recent', 'Top Donors', 'Inactive']
+        }}
+        onPrimaryAction={() => setIsImportModalOpen(true)}
+      />
 
       <div className="donors-container">
         {donors.length === 0 ? (
           // Empty state
-          <div className="empty-state">
-            <div className="empty-state-icon">
-              <FontAwesomeIcon icon={faUsers} />
-            </div>
-            <h3>No donors yet</h3>
-            <p>Add your first donor to start tracking donations and building relationships with your supporters.</p>
-            <div className="empty-state-actions">
-              <button className="primary-button" onClick={handleImportClick}>
-                <FontAwesomeIcon icon={faFileImport} /> Import Donors
-              </button>
-              <button className="primary-button">
-                <FontAwesomeIcon icon={faPlus} /> Add Donor
-              </button>
-            </div>
-          </div>
+          <Stub 
+            {...donorManagerStubProps}
+            onPrimaryAction={() => setIsImportModalOpen(true)}
+            onSecondaryAction={() => console.log('Add donor clicked')}
+          />
         ) : (
           // Donor list
           <div className="donor-list">

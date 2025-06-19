@@ -1,0 +1,114 @@
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+controls-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.25rem;
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 180px;
+    overflow: hidden;
+}
+
+.filter-dropdown1 {
+    position: relative;
+}
+
+.filter-button1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--text-primary-color);
+}
+
+.filter-button1:hover {
+    background-color: var(--card-color-hover);
+}
+
+.filter-menu1 {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.25rem;
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 180px;
+    overflow: hidden;
+}
+    
+.filter-menu1 button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary-color);
+    transition: background-color 0.2s;
+}
+    
+.filter-menu1 button:hover {
+    background-color: var(--card-color-hover);
+}
+
+.action-buttons1 {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.import-button1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--text-primary-color);
+}
+
+.import-button1:hover {
+    background-color: var(--card-color-hover);
+}
+
+.add-button1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--text-primary-color);
+}
+
+.add-button1:hover {
+    background-color: var(--card-color-hover);
+}
