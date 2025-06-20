@@ -35,7 +35,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ showModal, onClose })
   
   // Navigation
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const totalSteps = 3; // Three questions: EIN, fundraising goal, org type
+  const totalSteps: number = 3; // Three questions: EIN, fundraising goal, org type
   
   const handleCloseModal = () => {
     onClose();
@@ -152,6 +152,19 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ showModal, onClose })
                 <p className="input-help">Please enter your 9-digit Employer Identification Number</p>
               )}
             </div>
+            
+            {/* Navigation buttons moved inside each question container */}
+            <div className="navigation-buttons">
+              {currentStep > 1 && (
+                <button className="back-button" onClick={handleBack}>
+                  Back
+                </button>
+              )}
+              
+              <button className="continue-button" onClick={handleContinue}>
+                {currentStep === totalSteps ? 'Submit' : 'Continue'}
+              </button>
+            </div>
           </div>
         );
         
@@ -175,6 +188,19 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ showModal, onClose })
               ) : (
                 <p className="input-help">Enter your organization's fundraising target for 2025</p>
               )}
+            </div>
+            
+            {/* Navigation buttons moved inside each question container */}
+            <div className="navigation-buttons">
+              {currentStep > 1 && (
+                <button className="back-button" onClick={handleBack}>
+                  Back
+                </button>
+              )}
+              
+              <button className="continue-button" onClick={handleContinue}>
+                {currentStep === totalSteps ? 'Submit' : 'Continue'}
+              </button>
             </div>
           </div>
         );
@@ -205,6 +231,19 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ showModal, onClose })
                 <p className="input-help">Select the category that best describes your organization</p>
               )}
             </div>
+            
+            {/* Navigation buttons moved inside each question container */}
+            <div className="navigation-buttons">
+              {currentStep > 1 && (
+                <button className="back-button" onClick={handleBack}>
+                  Back
+                </button>
+              )}
+              
+              <button className="continue-button" onClick={handleContinue}>
+                {currentStep === totalSteps ? 'Submit' : 'Continue'}
+              </button>
+            </div>
           </div>
         );
         
@@ -230,19 +269,6 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ showModal, onClose })
         
         {/* Dynamic step content */}
         {renderStepContent()}
-        
-        {/* Navigation buttons */}
-        <div className="navigation-buttons">
-          {currentStep > 1 && (
-            <button className="back-button" onClick={handleBack}>
-              Back
-            </button>
-          )}
-          
-          <button className="continue-button" onClick={handleContinue}>
-            {currentStep === totalSteps ? 'Submit' : 'Continue'}
-          </button>
-        </div>
       </div>
     </div>
   );

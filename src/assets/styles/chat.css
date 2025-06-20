@@ -10,10 +10,10 @@
 
 .chat-header {
   padding: 1rem;
-  background-color: var(--primary-color);
+  background-color: var(--background-color);
   color: white;
   font-weight: 500;
-
+  border-bottom: 1px solid var(--border-color);
 }
 
 .chat-header h3 {

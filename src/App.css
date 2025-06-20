@@ -1,6 +1,7 @@
 .app-container {
   display: flex;
   height: 100vh;
+  overflow: hidden; /* Prevent overall page scrolling */
 }
 
 .content-wrapper {
@@ -8,6 +9,7 @@
   flex: 1;
   margin-left: 250px; /* Same as sidebar width */
   transition: margin-left 0.3s ease;
+  overflow: hidden; /* Prevent wrapper scrolling */
 }
 
 .content-wrapper.sidebar-collapsed {
@@ -18,6 +20,8 @@
   flex: 1;
   padding: 0.5rem;
   border-left: 1px solid var(--border-color);
+  overflow-y: auto; /* Enable vertical scrolling for main content */
+  height: 100vh; /* Full viewport height */
 }
 
 /* Responsive styles */
@@ -25,9 +29,16 @@
   .content-wrapper {
     flex-direction: column;
     margin-left: 0;
+    overflow: visible; /* Allow scrolling on mobile */
   }
   
   .main-content {
     flex: none;
+    overflow-y: visible; /* Reset overflow for mobile */
+    height: auto; /* Reset height for mobile */
+  }
+  
+  .app-container {
+    overflow: visible; /* Allow scrolling on mobile */
   }
 }

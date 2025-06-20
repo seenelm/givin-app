@@ -265,29 +265,40 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--text-secondary-color);
-  transition: color 0.2s;
+  color: var(--secondary-color);
+  transition: all 0.2s ease;
   z-index: 10;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .close-modal-button:hover {
-  color: var(--text-primary-color);
+  color: var(--primary-color);
+  background-color: var(--text-primary-color);
 }
+
 
 /* Progress bar */
 .progress-bar-container {
-  width: 100%;
+  width: 75%;
   height: 8px;
   background-color: var(--skeleton-color);
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
 }
 
 .progress-bar {
   height: 100%;
   background-color: var(--primary-color);
   transition: width 0.3s ease;
+  border-radius: 4px;
 }
 
 /* Question container */
@@ -313,8 +324,8 @@
 /* Input styling */
 .input-container {
   width: 100%;
-  max-width: 300px;
-  margin-bottom: 2rem;
+  max-width: 400px;
+  margin-bottom: 1rem;
 }
 
 .input-container label {
@@ -370,7 +381,7 @@
   justify-content: space-between;
   width: 100%;
   max-width: 300px;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .back-button {
