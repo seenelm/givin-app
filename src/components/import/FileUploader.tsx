@@ -2,15 +2,19 @@ import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload, faFile } from '@fortawesome/free-solid-svg-icons';
 
-interface CSVUploaderProps {
-  onFileLoaded: (data: string) => void;
+interface FileUploaderProps {
+  onFileSelected: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onError: (error: string) => void;
 }
 
-const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded, onError }) => {
+const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelected, onError }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Supported file extensions
+  const supportedFormats = ['.csv', '.pdf', '.docx', '.txt', '.xlsx', '.xls'];
+  const acceptString = supportedFormats.join(',');
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -35,29 +39,36 @@ const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded, onError }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      processFile(file);
+      processFile(file, e);
     }
   };
 
-  const processFile = (file: File) => {
-    if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
-      onError('Please upload a valid CSV file');
+  const processFile = (file: File, event?: React.ChangeEvent<HTMLInputElement>) => {
+    // Check if the file extension is supported
+    const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+    if (!supportedFormats.includes(fileExtension)) {
+      onError(`Unsupported file format. Please upload one of the following formats: ${supportedFormats.join(', ')}`);
       return;
     }
 
     setFileName(file.name);
     
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const text = e.target?.result as string;
-      if (text) {
-        onFileLoaded(text);
-      }
-    };
-    reader.onerror = () => {
-      onError('Error reading file');
-    };
-    reader.readAsText(file);
+    if (event) {
+      onFileSelected(event);
+    } else {
+      // If no event is available (e.g., from drag and drop)
+      // Create a synthetic event with the file
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      
+      const syntheticEvent = {
+        target: {
+          files: dataTransfer.files
+        }
+      } as unknown as React.ChangeEvent<HTMLInputElement>;
+      
+      onFileSelected(syntheticEvent);
+    }
   };
 
   const handleButtonClick = () => {
@@ -65,7 +76,7 @@ const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded, onError }) => {
   };
 
   return (
-    <div className="csv-uploader">
+    <div className="file-uploader">
       <div 
         className={`upload-area ${isDragging ? 'dragging' : ''}`}
         onDragOver={handleDragOver}
@@ -74,7 +85,7 @@ const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded, onError }) => {
       >
         <input
           type="file"
-          accept=".csv"
+          accept={acceptString}
           onChange={handleFileChange}
           ref={fileInputRef}
           style={{ display: 'none' }}
@@ -89,7 +100,7 @@ const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded, onError }) => {
           </div>
         ) : (
           <div className="upload-instructions">
-            <p>Drag and drop a CSV file here</p>
+            <p>Drag and drop a file here</p>
             <p>or</p>
             <button 
               className="upload-button"
@@ -97,7 +108,9 @@ const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded, onError }) => {
             >
               Select File
             </button>
-            <p className="file-hint">Only CSV files are supported</p>
+            <p className="file-hint">
+              Supported formats: CSV, PDF, DOCX, TXT, XLSX, XLS
+            </p>
           </div>
         )}
       </div>
@@ -105,4 +118,4 @@ const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded, onError }) => {
   );
 };
 
-export default CSVUploader;
+export default FileUploader;

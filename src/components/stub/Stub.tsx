@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { type IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import './stub.css';
+import '../styles/stub.css';
 
 export interface StubProps {
   icon: IconDefinition;

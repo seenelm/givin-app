@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../pages/styles/Dashboard.css';
+import '../../pages/styles/Dashboard.css';
 
 // Types of organizations
 const organizationTypes = [

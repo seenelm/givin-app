@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './styles/DonorManager.css';
-import CSVImportModal from '../components/csv/CSVImportModal';
-import '../components/csv/CSVImport.css';
 import Controls from '../components/controls/Controls';
 import Stub from '../components/stub/Stub';
 import donorManagerStubProps from '../models/DonationManagerStub';
@@ -23,18 +21,7 @@ interface Donor {
 }
 
 const DonorManager: React.FC = () => {
-  const [donors, setDonors] = useState<Donor[]>([]);
-  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-
-  const handleImportComplete = (importedDonors: Donor[]) => {
-    // Add unique IDs to imported donors
-    const donorsWithIds = importedDonors.map((donor, index) => ({
-      ...donor,
-      id: `imported-${Date.now()}-${index}`
-    }));
-    
-    setDonors(prev => [...prev, ...donorsWithIds]);
-  };
+  const [donors] = useState<Donor[]>([]);
 
   return (
     <div className="content-body donor-manager-container">
@@ -50,7 +37,6 @@ const DonorManager: React.FC = () => {
           defaultOption: 'All Donors',
           options: ['All Donors', 'Recent', 'Top Donors', 'Inactive']
         }}
-        onPrimaryAction={() => setIsImportModalOpen(true)}
       />
 
       <div className="donors-container">
@@ -58,8 +44,7 @@ const DonorManager: React.FC = () => {
           // Empty state
           <Stub 
             {...donorManagerStubProps}
-            onPrimaryAction={() => setIsImportModalOpen(true)}
-            onSecondaryAction={() => console.log('Add donor clicked')}
+            onPrimaryAction={() => console.log('Add donor clicked')}
           />
         ) : (
           // Donor list
@@ -94,13 +79,6 @@ const DonorManager: React.FC = () => {
           </div>
         )}
       </div>
-      
-      {/* CSV Import Modal */}
-      <CSVImportModal 
-        isOpen={isImportModalOpen}
-        onClose={() => setIsImportModalOpen(false)}
-        onImportComplete={handleImportComplete}
-      />
     </div>
   );
 };

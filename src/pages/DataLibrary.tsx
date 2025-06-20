@@ -5,6 +5,7 @@ import './styles/DataLibrary.css'
 import Controls from '../components/controls/Controls';
 import Stub from '../components/stub/Stub';
 import dataLibraryStubProps from '../models/DataLibraryStub';
+import CSVImportModal from '../components/import/ImportModal';
 
 interface DataFile {
   id: string;
@@ -145,35 +146,12 @@ const DataLibrary = () => {
       </div>
 
       {showUploadModal && (
-        <div className="upload-modal-overlay">
-          <div className="upload-modal">
-            <h2>Upload Data Files</h2>
-            <p>Select CSV or Excel files containing your donation data</p>
-            
-            <div className="upload-modal-content">
-              <label className="file-input-label">
-                Browse Files
-                <input 
-                  type="file" 
-                  multiple 
-                  onChange={handleFileUpload} 
-                  className="file-input"
-                  accept=".csv,.xlsx,.xls"
-                />
-              </label>
-              <p className="file-types">Supported formats: CSV, Excel</p>
-            </div>
-            
-            <div className="modal-actions">
-              <button 
-                className="cancel-button"
-                onClick={() => setShowUploadModal(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+        <CSVImportModal
+          isOpen={showUploadModal}
+          onClose={() => setShowUploadModal(false)}
+          onImportComplete={handleFileUpload}
+          title="Upload Data Files"
+        />
       )}
     </div>
   );

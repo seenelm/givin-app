@@ -6,7 +6,7 @@ import {
   faRocket,
   faBuilding,
 } from '@fortawesome/free-solid-svg-icons';
-import OnboardingModal from '../components/OnboardingModal';
+import OnboardingModal from '../components/onboarding/OnboardingModal';
 import { initializeDatabase } from '../utils/supabaseClient';
 
 const Dashboard: React.FC = () => {

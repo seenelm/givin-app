@@ -5,7 +5,7 @@ import {
   faPlus, 
   faFileImport
 } from '@fortawesome/free-solid-svg-icons';
-import './controls.css';
+import '../styles/controls.css';
 
 interface ControlsProps {
   filterOptions?: {
