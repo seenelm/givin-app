@@ -29,16 +29,16 @@
   .content-wrapper {
     flex-direction: column;
     margin-left: 0;
-    overflow: visible; /* Allow scrolling on mobile */
+    overflow-y: visible;
   }
   
   .main-content {
-    flex: none;
-    overflow-y: visible; /* Reset overflow for mobile */
-    height: auto; /* Reset height for mobile */
+    height: auto; 
+    border-left: none;
   }
   
   .app-container {
-    overflow: visible; /* Allow scrolling on mobile */
+    flex: 1;
+    overflow-y: visible;
   }
 }

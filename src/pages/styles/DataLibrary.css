@@ -18,172 +18,163 @@
   line-height: 1.5;
 }
 
+/* Data Files Styles */
+.data-library-container .data-files-container {
+  margin-top: 1.5rem;
+}
+
+.data-library-container .csv-files-header {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--text-primary-color);
+}
+
+.data-library-container .donors-container {
+  width: 100%;
+}
+
 .data-library-container .donor-list {
+  width: 100%;
+  overflow-x: auto;
   background-color: var(--card-color);
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .data-library-container .donor-table {
   width: 100%;
   border-collapse: collapse;
-}
-
-.data-library-container .donor-table th,
-.data-library-container .donor-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
 }
 
 .data-library-container .donor-table th {
-  font-weight: 600;
-  color: var(--text-primary-color);
   background-color: var(--card-color);
-  font-size: 0.9rem;
+  color: var(--text-secondary-color);
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.data-library-container .donor-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary-color);
+  vertical-align: middle;
+}
+
+.data-library-container .donor-table tr:last-child td {
+  border-bottom: none;
 }
 
 .data-library-container .donor-table tr:hover {
-  background-color: var(--card-color-hover);
+  background-color: rgba(49, 223, 162, 0.05);
 }
 
 .data-library-container .donor-actions {
   display: flex;
   gap: 0.5rem;
-}
-
-.data-library-container .action-button {
-  background: none;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--text-secondary-color);
-}
-
-.data-library-container .action-button:hover {
-  background-color: var(--card-color-hover);
-  color: var(--text-primary-color);
-}
-
-.data-library-container .action-button.view {
-  color: #2196F3;
-}
-
-.data-library-container .action-button.view:hover {
-  background-color: rgba(33, 150, 243, 0.1);
-}
-
-.data-library-container .action-button.download {
-  color: var(--primary-color);
-}
-
-.data-library-container .action-button.download:hover {
-  background-color: rgba(49, 223, 162, 0.1);
-}
-
-.data-library-container .action-button.delete {
-  color: #F44336;
-}
-
-.data-library-container .action-button.delete:hover {
-  background-color: rgba(244, 67, 54, 0.1);
-}
-
-.upload-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.upload-modal {
-  background-color: var(--card-color);
-  border-radius: 8px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.upload-modal h2 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 20px;
-  color: #333;
-}
-
-.upload-modal p {
-  color: #666;
-  margin-bottom: 24px;
-}
-
-.upload-modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  margin-bottom: 24px;
-}
-
-.file-input {
-  display: none;
-}
-
-.file-input-label {
-  display: inline-block;
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 10px 0;
-  font-weight: 500;
-  transition: background-color 0.3s;
-}
-
-.file-input-label:hover {
-  background-color: #388E3C;
-}
-
-.file-types {
-  color: #757575;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.modal-actions {
-  display: flex;
   justify-content: flex-end;
 }
 
-.cancel-button {
-  background-color: transparent;
-  color: #666;
-  border: 1px solid #ddd;
-  padding: 10px 16px;
+.data-library-container .action-button {
+  padding: 0.5rem 0.75rem;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.2s;
+  border: none;
 }
 
-.cancel-button:hover {
-  background-color: #f5f5f5;
+.data-library-container .action-button.view {
+  background-color: var(--card-color-hover);
+  color: var(--primary-color);
 }
 
+.data-library-container .action-button.view:hover {
+  background-color: var(--card-color-hover);
+  opacity: 0.8;
+}
+
+.data-library-container .action-button.download {
+  background-color: var(--card-color);
+  color: var(--text-primary-color);
+}
+
+.data-library-container .action-button.download:hover {
+  background-color: var(--card-color-hover);
+}
+
+/* Loading and Error States */
+.data-library-container .loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--text-secondary-color);
+}
+
+.data-library-container .loading-spinner {
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid var(--primary-color);
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.data-library-container .error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #d32f2f;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .data-library-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .data-library-container .donors-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .data-library-container .donor-list {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+  
+  .data-library-container .donor-table {
+    min-width: 600px; /* Ensure table has minimum width for scrolling */
+  }
+  
+  .data-library-container .donor-table th,
+  .data-library-container .donor-table td {
+    padding: 0.75rem;
+    white-space: nowrap;
+  }
+  
+  .data-library-container .donor-actions {
+    min-width: 110px; /* Ensure action buttons don't wrap */
+  }
+}
