@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/StatCard.css';
+import '../styles/statCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { type IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
