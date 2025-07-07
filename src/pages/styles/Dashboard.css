@@ -117,6 +117,54 @@
   background-color: var(--secondary-color);
 }
 
+/* ===== Dashboard Content Styles ===== */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Stat Cards Grid */
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .stat-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Stacked Cards Container */
+.stacked-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  grid-column: span 2;
+}
+
+.stacked-cards .top-list-card {
+  grid-column: span 1;
+  min-height: 240px; /* Shorter height for each card */
+}
+
+@media (max-width: 768px) {
+  .stacked-cards {
+    grid-column: 1;
+  }
+}
+
 /* ===== Empty State Styles ===== */
 .dashboard-empty {
   display: flex;

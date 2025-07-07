@@ -1,0 +1,166 @@
+/* Stat Card Styles */
+.stat-card {
+  display: flex;
+  padding: 1.5rem;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  min-width: 220px;
+  border: 1px solid var(--border-color);
+}
+
+.stat-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  background-color: var(--lighter-icon-background, rgba(255, 255, 255, 0.2));
+}
+
+.stat-card-content {
+  flex: 1;
+}
+
+.stat-card-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary-color);
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.stat-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary-color);
+  margin-top: 0.25rem;
+}
+
+.stat-card-trend {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.stat-card-trend.positive {
+  background-color: rgba(49, 223, 162, 0.15);
+  color: var(--primary-color);
+}
+
+.stat-card-trend.negative {
+  background-color: rgba(255, 107, 107, 0.15);
+  color: var(--error-color);
+}
+
+/* Mini Bar Chart */
+.stat-card-chart {
+  display: flex;
+  align-items: flex-end;
+  height: 40px;
+  gap: 6px;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.stat-card-chart-bar-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.stat-card-chart-bar {
+  width: 10px;
+  border-radius: 1.5px 1.5px 0 0;
+  transition: height 0.3s ease, width 0.2s ease;
+}
+
+.stat-card-chart-bar-container:hover .stat-card-chart-bar {
+  width: 5px;
+}
+
+.stat-card-chart-tooltip {
+  position: absolute;
+  top: -20px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-secondary-color);
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.stat-card-chart-bar-container:hover .stat-card-chart-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variants */
+.stat-card-primary .stat-card-icon {
+  background-color: rgba(49, 223, 162, 0.08);
+  color: var(--primary-color);
+}
+
+.stat-card-secondary .stat-card-icon {
+  background-color: rgba(118, 106, 255, 0.08);
+  color: var(--secondary-color);
+}
+
+.stat-card-success .stat-card-icon {
+  background-color: rgba(49, 223, 162, 0.08);
+  color: var(--primary-color);
+}
+
+.stat-card-warning .stat-card-icon {
+  background-color: rgba(255, 193, 7, 0.08);
+  color: #ffc107;
+}
+
+.stat-card-info .stat-card-icon {
+  background-color: rgba(13, 202, 240, 0.08);
+  color: #0dcaf0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stat-card {
+    padding: 1.25rem;
+  }
+  
+  .stat-card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+  
+  .stat-card-value {
+    font-size: 1.5rem;
+  }
+  
+  .stat-card-chart {
+    height: 30px;
+  }
+}
