@@ -13,6 +13,7 @@ import DataLibrary from './pages/DataLibrary';
 import './App.css';
 import './pages/styles/Dashboard.css';
 import Login from './pages/Login';
+import PrivateRoute from './routes/PrivateRoute';
 
 // Content component that uses the sidebar context
 const AppContent = () => {
@@ -26,12 +27,37 @@ const AppContent = () => {
       <div className={`content-wrapper ${isCollapsed ? 'sidebar-collapsed' : ''}`}>
         <div className="main-content">
           <Routes>
-            <Route path="/login" element={<Login />} /> // Login Route
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/fundraising-manager" element={<FundraisingManager />} />
-            <Route path="/donor-manager" element={<DonorManager />} />
+
+            <Route path="/login" element={<Login />} /> 
+
+            <Route path="/dashboard" element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            } />
+
+            <Route path="/fundraising-manager" element={
+              <PrivateRoute>
+                <FundraisingManager />
+              </PrivateRoute>
+            } />
+
+            <Route path="/donor-manager" element={
+              <PrivateRoute>
+                <DonorManager />
+              </PrivateRoute>
+            } />
+
             <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/data-library" element={<DataLibrary />} />
+
+            <Route path="/data-library" element={
+              <PrivateRoute>
+                <DataLibrary />
+              </PrivateRoute>
+            } />
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate to="/fundraising-manager" replace />} />
           </Routes>
         </div>
         {!isLoginPage && <ResizableChatSidebar />}
