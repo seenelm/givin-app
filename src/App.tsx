@@ -24,7 +24,7 @@ const AppContent = () => {
   return (
     <div className="app-container">
       {!isLoginPage && <SidebarView />}
-      <div className={`content-wrapper ${isCollapsed ? 'sidebar-collapsed' : ''}`}>
+      <div className={`content-wrapper ${isCollapsed ? 'sidebar-collapsed' : ''}`} style={isLoginPage ? { marginLeft: 0, width: '100%' } : undefined}>
         <div className="main-content">
           <Routes>
 
@@ -56,8 +56,6 @@ const AppContent = () => {
               </PrivateRoute>
             } />
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Navigate to="/fundraising-manager" replace />} />
           </Routes>
         </div>
         {!isLoginPage && <ResizableChatSidebar />}

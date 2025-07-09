@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../context/AuthContext';
+import './styles/Login.css';
 
 export default function Login() {
   const { login } = useAuth();
@@ -32,7 +33,7 @@ export default function Login() {
     >
       <form
         onSubmit={handleSubmit}
-        style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}
+        className="login-form"
       >
         <h2>Login</h2>
         <input
