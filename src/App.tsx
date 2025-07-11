@@ -7,12 +7,17 @@ import ResizableChatSidebar from './components/chat/ResizableChatSidebar';
 import FloatingChatButton from './components/chat/FloatingChatButton';
 import { ChatSidebarProvider } from './context/ChatSidebarContext';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import Login from './pages/Login';
+import AuthAdmin from './pages/AuthAdmin';
+import AuthCallback from './pages/AuthCallback';
 import DataLibrary from './pages/DataLibrary';
 import './App.css';
 import './pages/styles/Dashboard.css';
 
-// Content component that uses the sidebar context
-const AppContent = () => {
+// AuthenticatedLayout component that includes sidebar and other app elements
+const AuthenticatedLayout = () => {
   const { isCollapsed } = useSidebar();
   
   return (
@@ -24,8 +29,9 @@ const AppContent = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/fundraising-manager" element={<FundraisingManager />} />
             <Route path="/donor-manager" element={<DonorManager />} />
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/data-library" element={<DataLibrary />} />
+            <Route path="/auth-admin" element={<AuthAdmin />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </div>
         <ResizableChatSidebar />
@@ -37,13 +43,29 @@ const AppContent = () => {
 
 function App() {
   return (
-    <ChatSidebarProvider>
-      <SidebarProvider>
-        <Router>
-          <AppContent />
-        </Router>
-      </SidebarProvider>
-    </ChatSidebarProvider>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+          
+          {/* Protected routes with authenticated layout */}
+          <Route path="/*" element={
+            <ProtectedRoute>
+              <ChatSidebarProvider>
+                <SidebarProvider>
+                  <AuthenticatedLayout />
+                </SidebarProvider>
+              </ChatSidebarProvider>
+            </ProtectedRoute>
+          } />
+          
+          {/* Default route */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

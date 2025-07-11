@@ -5,14 +5,15 @@ import {
   faUsers, 
   faHome,
   faBook,
-
+  faSignOut,
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
-import givinLogo from '../../assets/images/logo.svg';
+import donorLoopLogo from '../../assets/images/donor-loop-logo.png';
 import '../../assets/styles/sidebar.css';
 import { type SidebarProps, useSidebarLogic } from './SidebarLogic';
 import { useSidebar } from '../../context/SidebarContext';
+import { useAuth } from '../../context/AuthContext';
 
 export const SidebarView: React.FC<SidebarProps> = (props) => {
   const {
@@ -23,6 +24,12 @@ export const SidebarView: React.FC<SidebarProps> = (props) => {
   } = useSidebarLogic(props);
   
   const { isCollapsed, toggleSidebar } = useSidebar();
+  const { signOut } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/login');
+  };
 
   // Mobile tab bar
   if (isMobile) {
@@ -68,7 +75,7 @@ export const SidebarView: React.FC<SidebarProps> = (props) => {
     <>
       <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-header">
-          <img src={givinLogo} alt="Givin Logo" className="sidebar-logo" />
+          <img src={donorLoopLogo} alt="Donor Loop Logo" className="sidebar-logo" />
           {!isCollapsed && <h2>{title}</h2>}
         </div>
         
@@ -123,6 +130,23 @@ export const SidebarView: React.FC<SidebarProps> = (props) => {
                   <FontAwesomeIcon icon={faHome} />
                 </span>
                 {!isCollapsed && <span className="button-text">Dashboard</span>}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* Logout button at the bottom */}
+        <div className="sidebar-section">
+          <ul className="sidebar-menu">
+            <li className="sidebar-menu-item">
+              <button 
+                className="sidebar-button"
+                onClick={handleLogout}
+              >
+                <span className="icon">
+                  <FontAwesomeIcon icon={faSignOut} />
+                </span>
+                {!isCollapsed && <span className="button-text">Logout</span>}
               </button>
             </li>
           </ul>

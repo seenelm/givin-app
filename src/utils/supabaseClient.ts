@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type User, AuthError } from '@supabase/supabase-js';
 
 // Environment variables for Supabase connection
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -6,6 +6,193 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Create a single instance of the Supabase client
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Auth related functions
+export type AuthResponse = {
+  user: User | null;
+  error: AuthError | null;
+};
+
+export async function signInWithGoogle(): Promise<AuthResponse> {
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+    
+    // For OAuth, we don't get a user object immediately
+    // The user will be redirected to Google and then back to the callback URL
+    return { 
+      user: null, // OAuth flow doesn't return a user immediately
+      error 
+    };
+  } catch (error) {
+    console.error('Error signing in with Google:', error);
+    return { 
+      user: null, 
+      error: error as AuthError 
+    };
+  }
+}
+
+export async function signInWithEmail(email: string, password: string): Promise<AuthResponse> {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    
+    return { 
+      user: data?.user || null, 
+      error 
+    };
+  } catch (error) {
+    console.error('Error signing in with email:', error);
+    return { 
+      user: null, 
+      error: error as AuthError 
+    };
+  }
+}
+
+export async function signUp(email: string, password: string): Promise<AuthResponse> {
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    
+    return { 
+      user: data?.user || null, 
+      error 
+    };
+  } catch (error) {
+    console.error('Error signing up:', error);
+    return { 
+      user: null, 
+      error: error as AuthError 
+    };
+  }
+}
+
+export async function signOut(): Promise<{ error: AuthError | null }> {
+  try {
+    const { error } = await supabase.auth.signOut();
+    return { error };
+  } catch (error) {
+    console.error('Error signing out:', error);
+    return { 
+      error: error as AuthError 
+    };
+  }
+}
+
+export async function getCurrentUser(): Promise<User | null> {
+  try {
+    const { data } = await supabase.auth.getUser();
+    return data?.user || null;
+  } catch (error) {
+    console.error('Error getting current user:', error);
+    return null;
+  }
+}
+
+export async function getSession() {
+  try {
+    const { data } = await supabase.auth.getSession();
+    return data.session;
+  } catch (error) {
+    console.error('Error getting session:', error);
+    return null;
+  }
+}
+
+// Function to add an authorized email to the allowed_emails table
+export async function addAuthorizedEmail(email: string): Promise<{ success: boolean; error: string | null }> {
+  try {
+    const { error } = await supabase
+      .from('allowed_emails')
+      .insert([{ email }]);
+    
+    if (error) throw error;
+    
+    return { success: true, error: null };
+  } catch (error) {
+    console.error('Error adding authorized email:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+}
+
+// Function to check if an email is authorized
+export async function isEmailAuthorized(email: string): Promise<{ authorized: boolean; error: string | null }> {
+  try {
+    const { data, error } = await supabase
+      .from('allowed_emails')
+      .select()
+      .eq('email', email)
+      .single();
+    
+    if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned" which is expected if not found
+      throw error;
+    }
+    
+    return { authorized: !!data, error: null };
+  } catch (error) {
+    console.error('Error checking if email is authorized:', error);
+    return {
+      authorized: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+}
+
+// Function to list all authorized emails
+export async function listAuthorizedEmails(): Promise<{ 
+  data: { id: number; email: string; created_at: string }[] | null; 
+  error: string | null 
+}> {
+  try {
+    const { data, error } = await supabase
+      .from('allowed_emails')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    
+    return { data, error: null };
+  } catch (error) {
+    console.error('Error listing authorized emails:', error);
+    return {
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+}
+
+// Function to remove an authorized email
+export async function removeAuthorizedEmail(id: number): Promise<{ success: boolean; error: string | null }> {
+  try {
+    const { error } = await supabase
+      .from('allowed_emails')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+    
+    return { success: true, error: null };
+  } catch (error) {
+    console.error('Error removing authorized email:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+}
 
 // Donor data interface
 export interface DonorData {

@@ -1,0 +1,143 @@
+.auth-admin-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.auth-admin-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.auth-admin-content h1 {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.auth-admin-description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.auth-admin-error {
+  background-color: #fff0f0;
+  color: #e53935;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.auth-admin-success {
+  background-color: #f0fff0;
+  color: #43a047;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.auth-admin-card {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.auth-admin-card h2 {
+  margin-bottom: 1rem;
+  color: #444;
+  font-size: 1.4rem;
+}
+
+.auth-admin-form .form-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-admin-form input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.auth-admin-form input:focus {
+  border-color: #4285F4;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.add-email-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-email-button:hover {
+  background-color: #3367d6;
+}
+
+.add-email-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loading-text {
+  color: #666;
+  text-align: center;
+  padding: 1rem;
+}
+
+.no-emails-text {
+  color: #666;
+  text-align: center;
+  padding: 1rem;
+}
+
+.emails-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.emails-table th,
+.emails-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.emails-table th {
+  font-weight: 600;
+  color: #555;
+  background-color: #f5f5f5;
+}
+
+.remove-email-button {
+  padding: 0.5rem 0.75rem;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.remove-email-button:hover {
+  background-color: #d32f2f;
+}
+
+.remove-email-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

@@ -18,7 +18,7 @@ export interface SidebarProps {
 }
 
 export const useSidebarLogic = (props: SidebarProps = {}) => {
-  const { title = "Givin" } = props;
+  const { title = "DonorLoop" } = props;
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
